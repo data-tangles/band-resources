@@ -133,5 +133,11 @@ jobs:
         with:
           cli_config_credentials_token: ${{ secrets.TERRAFORM_TOKEN }}
 
+      - name: Terraform Init 🏃
+        id: terraformInit
+        run: terraform init
+        env:
+          DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}
+
       - name: Terraform Apply 🚀
         run: terraform apply ${{ github.run_id }}.tfplan
