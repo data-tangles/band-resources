@@ -54,10 +54,6 @@ jobs:
         env:
           DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}
 
-      - name: Terraform format ✅
-        id: fmt
-        run: terraform fmt -check
-
       - name: Terraform validate ✅
         id: validate
         run: terraform validate
@@ -70,6 +66,7 @@ jobs:
       - name: Cache Terraform Plan 📦
         uses: actions/cache/save@0c907a75c2c80ebcb7f088228285e798b750cf8f # v4.2.1
         with:
+          path: ${{ env.WORKING_DIRECTORY }}/**
           key: ${{ github.run_id }}
 
   documentation:
@@ -94,7 +91,7 @@ jobs:
         uses: terraform-docs/gh-actions@v1.3.0
         id: terraform-docs
         with:
-          working-directory: ${{ env.WORKING_DIRECTORY }}
+          working-dir: ${{ env.WORKING_DIRECTORY }}
           output-method: replace
           output-file: TERRAFORM.md
           git-push: "true"

@@ -4,6 +4,7 @@ resource "digitalocean_project" "band-resources" {
   purpose     = var.digitalocean_project_purpose
   environment = var.digitalocean_project_environment
   resources = [
-    digitalocean_droplet.foobar.urn
+    digitalocean_droplet.docker.urn,
+    digitalocean_vpc.docker_vpc.urn
   ]
 }
