@@ -52,11 +52,6 @@ variable "digitalocean_firewall_name" {
   type        = string
 }
 
-variable "digitalocean_firewall_description" {
-  description = "Description of the firewall"
-  type        = string
-}
-
 variable "digitalocean_firewall_ssh_source_addresses" {
   description = "Source addresses for SSH"
   type        = list(string)
