@@ -2,6 +2,9 @@
 [![digital-ocean](https://img.shields.io/badge/digitalocean-blue?style=for-the-badge&logo=digitalocean)](https://www.digitalocean.com)
 [![renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?style=for-the-badge&logo=renovatebot)](https://github.com/renovatebot/renovate)
 
+[![Terraform Cloudflare Workflow](https://github.com/data-tangles/band-resources/actions/workflows/cloudflare_terraform.yml/badge.svg)](https://github.com/data-tangles/band-resources/actions/workflows/cloudflare_terraform.yml)
+[![Terraform Digital Ocean Workflow](https://github.com/data-tangles/band-resources/actions/workflows/digital_ocean_terraform.yml/badge.svg)](https://github.com/data-tangles/band-resources/actions/workflows/digital_ocean_terraform.yml)
+
 # band-resources
 
 ## Overview 
@@ -10,7 +13,7 @@ This repository contains a collection of Terraform modules, Docker Compose templ
 ## Directory Structure
 - **ansible/**: Contains Ansible playbooks for configuring Docker
 - **docker/**: Contains Docker Compose templates for setting up Traefik, WordPress and MySQL
-- **terraform/**: Contains Terraform configurations for setting up Digital Ocean resources.
+- **terraform/**: Contains Terraform configurations for setting up resources.
 
 ## Getting Started
 To get started with these modules, you will need to have Terraform installed on your machine. You can download Terraform from the [official website](https://www.terraform.io/downloads.html).
@@ -27,9 +30,9 @@ To get started with these modules, you will need to have Terraform installed on 
     cd band-resources
     ```
 
-2. Navigate to the desired module directory (e.g., `terraform`):
+2. Navigate to the desired module directory (e.g., `terraform/cloudflare`):
     ```sh
-    cd terraform
+    cd terraform/cloudflare
     ```
 
 3. Initialize Terraform:
@@ -46,10 +49,11 @@ To get started with these modules, you will need to have Terraform installed on 
     ```
 
 ## CI/CD
-This repository uses GitHub Actions for continuous integration and deployment. The workflows are defined in the [workflows](http://_vscodecontentref_/3) directory.
+This repository uses GitHub Actions for continuous integration and deployment. The workflows are defined in the [workflows](./.github/workflows) directory.
 
 ### Workflows
-- **terraform.yml**: CI/CD pipeline for running Terraform deployment.
+- **cloudflare_terraform.yml**: CI/CD pipeline for running Cloudflare Terraform deployment.
+- **digital_ocean_terraform.yml**: CI/CD pipeline for running Digital Ocean Terraform deployment.
 
 ## Contributing
 We welcome contributions to this repository. If you have an idea for a new feature or have found a bug, please open an issue or submit a pull request.
