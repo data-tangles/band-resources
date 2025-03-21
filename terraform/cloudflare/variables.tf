@@ -42,6 +42,16 @@ variable "a_record_3_value" {
   description = "Value of A record"
 }
 
+variable "a_record_4_name" {
+  type        = string
+  description = "Name of A record"
+}
+
+variable "a_record_4_value" {
+  type        = string
+  description = "Value of A record"
+}
+
 # MX Records
 
 variable "mx_record_1_name" {
