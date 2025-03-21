@@ -19,6 +19,7 @@ permissions:
 env:
   SOPS_VERSION: 3.9.4
   WORKING_DIRECTORY: "./terraform/digital_ocean/"
+  DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}
 
 jobs:
   init_and_plan:
@@ -52,8 +53,6 @@ jobs:
       - name: Terraform Init 🏃
         id: terraformInit
         run: terraform init
-        env:
-          DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}
 
       - name: Terraform validate ✅
         id: validate
@@ -137,8 +136,6 @@ jobs:
       - name: Terraform Init 🏃
         id: terraformInit
         run: terraform init
-        env:
-          DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}
 
       - name: Terraform Apply 🚀
         run: terraform apply ${{ github.run_id }}.tfplan

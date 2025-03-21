@@ -92,3 +92,8 @@ variable "digitalocean_droplet_backup_policy_hour" {
   description = "Backup policy hour"
   type        = number
 }
+
+variable "digitalocean_ssh_key" {
+  description = "SSH key to use for the droplet"
+  type        = string
+}

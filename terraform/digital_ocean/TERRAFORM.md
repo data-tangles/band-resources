@@ -42,6 +42,7 @@ No modules.
 | <a name="input_digitalocean_project_environment"></a> [digitalocean\_project\_environment](#input\_digitalocean\_project\_environment) | Environment of the project | `string` | n/a | yes |
 | <a name="input_digitalocean_project_name"></a> [digitalocean\_project\_name](#input\_digitalocean\_project\_name) | Name of the project | `string` | n/a | yes |
 | <a name="input_digitalocean_project_purpose"></a> [digitalocean\_project\_purpose](#input\_digitalocean\_project\_purpose) | Purpose of the project | `string` | n/a | yes |
+| <a name="input_digitalocean_ssh_key"></a> [digitalocean\_ssh\_key](#input\_digitalocean\_ssh\_key) | SSH key to use for the droplet | `string` | n/a | yes |
 | <a name="input_digitalocean_vpc_description"></a> [digitalocean\_vpc\_description](#input\_digitalocean\_vpc\_description) | Description of the VPC | `string` | n/a | yes |
 | <a name="input_digitalocean_vpc_ip_range"></a> [digitalocean\_vpc\_ip\_range](#input\_digitalocean\_vpc\_ip\_range) | IP range of the VPC | `string` | n/a | yes |
 | <a name="input_digitalocean_vpc_name"></a> [digitalocean\_vpc\_name](#input\_digitalocean\_vpc\_name) | Name of the VPC | `string` | n/a | yes |
