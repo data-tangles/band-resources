@@ -10,7 +10,7 @@ terraform {
     organization = "binarybraids"
 
     workspaces {
-      name = "band-resources"
+      name = "band-resources-digital-ocean"
     }
   }
 }
