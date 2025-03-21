@@ -22,6 +22,7 @@ No modules.
 | [digitalocean_droplet.docker](https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/droplet) | resource |
 | [digitalocean_firewall.firewall](https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/firewall) | resource |
 | [digitalocean_project.band-resources](https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/project) | resource |
+| [digitalocean_ssh_key.docker](https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/ssh_key) | resource |
 | [digitalocean_vpc.docker_vpc](https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/vpc) | resource |
 
 ## Inputs
