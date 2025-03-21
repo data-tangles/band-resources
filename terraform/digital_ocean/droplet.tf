@@ -1,6 +1,6 @@
 resource "digitalocean_ssh_key" "docker" {
   name       = "Docker SSH Key"
-  public_key = file("./ssh_keys/docker_ssh_key.pub")
+  public_key = var.digitalocean_ssh_key
 }
 
 resource "digitalocean_droplet" "docker" {
