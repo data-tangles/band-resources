@@ -36,7 +36,7 @@ resource "cloudflare_dns_record" "a_record_4" {
   content = var.a_record_4_value
   type    = "A"
   ttl     = 1
-  proxied = "true"
+  proxied = "false"
   comment = local.comment
 }
 
