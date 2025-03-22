@@ -2,9 +2,7 @@ name: wordpress
 
 networks:
   wordpress:
-    external: true
   proxy:
-    external: true
  
 volumes:
   mariadb-data:
