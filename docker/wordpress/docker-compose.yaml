@@ -1,3 +1,5 @@
+name: wordpress
+
 networks:
   wordpress:
     external: true
