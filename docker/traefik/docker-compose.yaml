@@ -11,17 +11,7 @@ services:
     image: "traefik:latest@sha256:ec1a82940b8e00eaeef33fb4113aa1d1573b2ebb6440e10c023743fe96f08475"
     container_name: "traefik"
     command:
-      - "--accesslog.filepath=/var/log/traefik/access.log"
-      - "--log.filePath=/var/log/traefik/traefik.log"
-      - "--api=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entryPoints.web.address=:80"
-      - "--entryPoints.websecure.address=:443"
-      - "--certificatesresolvers.letsencrypt.acme.dnschallenge=true"
-      - "--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=cloudflare"
-      - "--certificatesresolvers.letsencrypt.acme.email=${CLOUDFLARE_EMAIL}"
-      - "--certificatesresolvers.letsencrypt.acme.storage=/acme/acme.json"
+      - "--providers.file.filename=config.yaml"
     environment:
       - "CF_API_EMAIL=${CLOUDFLARE_EMAIL}"
       - "CF_DNS_API_TOKEN=${CLOUDFLARE_API_TOKEN}"
@@ -36,6 +26,9 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
       - "traefik:/var/log/traefik"
       - "acme:/acme"
+    configs:
+      - source: config.yaml
+        target: config.yaml
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.rule=Host(`traefik.${DOMAIN_NAME}`)"
@@ -46,6 +39,103 @@ services:
       - "traefik.http.routers.traefik.tls.certresolver=letsencrypt"
       - "traefik.http.routers.traefik.tls.domains[0].main=${DOMAIN_NAME}"
       - "traefik.http.routers.traefik.tls.domains[0].sans=*.${DOMAIN_NAME}"
+
+configs:
+  config.yaml:
+    content: |
+      api:
+        dashboard: true
+
+      entryPoints:
+        web:
+          address: ":80"
+          http:
+            redirections:
+              entryPoint:
+                to: websecure
+                scheme: https
+          proxyProtocol:
+            trustedIPs:
+              # Local IP
+              - "127.0.0.1/32",
+              - "192.168.24.0/24",
+              # Cloudflare
+              - "173.245.48.0/20",
+              - "103.21.244.0/22",
+              - "103.22.200.0/22",
+              - "103.31.4.0/22",
+              - "141.101.64.0/18",
+              - "108.162.192.0/18",
+              - "190.93.240.0/20",
+              - "188.114.96.0/20",
+              - "197.234.240.0/22",
+              - "198.41.128.0/17",
+              - "162.158.0.0/15",
+              - "104.16.0.0/13",
+              - "104.24.0.0/14",
+              - "172.64.0.0/13",
+              - "131.0.72.0/22",
+              - "2400:cb00::/32",
+              - "2606:4700::/32",
+              - "2803:f800::/32",
+              - "2405:b500::/32",
+              - "2405:8100::/32",
+              - "2a06:98c0::/29",
+              - "2c0f:f248::/32"
+
+      providers:
+        docker:
+          endpoint: "unix:///var/run/docker.sock"
+          exposedByDefault: false
+
+        websecure:
+          address: ":443"
+          proxyProtocol:
+            trustedIPs:
+              # Local IP
+              - "127.0.0.1/32",
+              - "192.168.24.0/24",
+              # Cloudflare
+              - "173.245.48.0/20",
+              - "103.21.244.0/22",
+              - "103.22.200.0/22",
+              - "103.31.4.0/22",
+              - "141.101.64.0/18",
+              - "108.162.192.0/18",
+              - "190.93.240.0/20",
+              - "188.114.96.0/20",
+              - "197.234.240.0/22",
+              - "198.41.128.0/17",
+              - "162.158.0.0/15",
+              - "104.16.0.0/13",
+              - "104.24.0.0/14",
+              - "172.64.0.0/13",
+              - "131.0.72.0/22",
+              - "2400:cb00::/32",
+              - "2606:4700::/32",
+              - "2803:f800::/32",
+              - "2405:b500::/32",
+              - "2405:8100::/32",
+              - "2a06:98c0::/29",
+              - "2c0f:f248::/32"
+
+        certificatesResolvers:
+          cloudflare:
+            acme:
+              email: ${CLOUDFLARE_EMAIL}
+              storage: /acme/acme.json
+              dnsChallenge:
+                provider: cloudflare
+          domains:
+            - main: ${DOMAIN_NAME}
+              sans:
+                - *.${DOMAIN_NAME}
+
+        middlewares:
+          auth:
+            basicAuth:
+              users:
+                - admin:${DASHBOARD_CREDENTIALS}
 
 networks:
   proxy:
