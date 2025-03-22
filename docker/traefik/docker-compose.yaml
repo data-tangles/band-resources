@@ -122,10 +122,6 @@ configs:
               storage: /acme/acme.json
               dnsChallenge:
                 provider: cloudflare
-          domains:
-            - main: ${DOMAIN_NAME}
-              sans:
-                - *.${DOMAIN_NAME}
 
         middlewares:
           auth:
