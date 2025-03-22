@@ -1,5 +1,8 @@
 name: traefik
 
+volumes:
+  traefik:
+
 services:
   traefik:
     image: "traefik:latest@sha256:ec1a82940b8e00eaeef33fb4113aa1d1573b2ebb6440e10c023743fe96f08475"
@@ -15,10 +18,10 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/localtime:/etc/localtime:ro"
-      - "/docker/traefik/traefik.yml:/traefik.yml:ro"
-      - "/docker/traefik/acme.json:/acme.json"
-      - "/docker/traefik/config.yml:/config.yml:ro"
-      - "/docker/traefik/logs:/var/log/traefik"
+      - "traefik:/traefik.yml:ro"
+      - "traefik:/acme.json"
+      - "traefik:/config.yml:ro"
+      - "traefik:/var/log/traefik"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.entrypoints=http"
