@@ -3,6 +3,7 @@ name: wordpress
 networks:
   wordpress:
   proxy:
+    external: true
  
 volumes:
   mariadb-data:
@@ -63,6 +64,4 @@ services:
     restart: unless-stopped
     depends_on:
       mariadb:
-        condition: service_healthy
-      traefik:
         condition: service_healthy
