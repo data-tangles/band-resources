@@ -37,8 +37,6 @@ services:
       - "traefik.http.routers.traefik.tls.certresolver=letsencrypt"
       - "traefik.http.routers.traefik.tls.domains[0].main=${DOMAIN_NAME}"
       - "traefik.http.routers.traefik.tls.domains[0].sans=*.${DOMAIN_NAME}"
-    extra_hosts:
-      - "${DOMAIN_NAME}:${DOCKER_HOST_IP}"
 
 configs:
   traefik.yaml:
