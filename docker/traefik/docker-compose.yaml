@@ -23,7 +23,7 @@ services:
       - "traefik:/var/log/traefik"
     configs:
       - source: traefik.yml
-        target: /traefik.yml
+        target: traefik.yml
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.entrypoints=http"
