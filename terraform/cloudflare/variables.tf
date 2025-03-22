@@ -57,6 +57,11 @@ variable "a_record_5_name" {
   description = "Name of A record"
 }
 
+variable "a_record_5_value" {
+  type        = string
+  description = "Value of A record"
+}
+
 # MX Records
 
 variable "mx_record_1_name" {
