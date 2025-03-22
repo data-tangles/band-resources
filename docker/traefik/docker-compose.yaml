@@ -10,8 +10,6 @@ services:
   traefik:
     image: "traefik:latest@sha256:ec1a82940b8e00eaeef33fb4113aa1d1573b2ebb6440e10c023743fe96f08475"
     container_name: "traefik"
-    command:
-      - "--providers.file.filename=config.yaml"
     environment:
       - "CF_API_EMAIL=${CLOUDFLARE_EMAIL}"
       - "CF_DNS_API_TOKEN=${CLOUDFLARE_API_TOKEN}"
@@ -27,8 +25,8 @@ services:
       - "traefik:/var/log/traefik"
       - "acme:/acme"
     configs:
-      - source: config.yaml
-        target: config.yaml
+      - source: traefik.yaml
+        target: /etc/traefik/traefik.yaml
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.rule=Host(`traefik.${DOMAIN_NAME}`)"
@@ -41,7 +39,7 @@ services:
       - "traefik.http.routers.traefik.tls.domains[0].sans=*.${DOMAIN_NAME}"
 
 configs:
-  config.yaml:
+  traefik.yaml:
     content: |
       api:
         dashboard: true
