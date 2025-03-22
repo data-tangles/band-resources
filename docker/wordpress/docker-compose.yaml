@@ -4,13 +4,13 @@ networks:
   wordpress:
   proxy:
     external: true
- 
+
 volumes:
   mariadb-data:
     name: mariadb-data
   wordpress-data:
     name: wordpress-data
- 
+
 services:
   mariadb:
     image: mariadb:lts-noble
@@ -31,10 +31,11 @@ services:
       retries: 3
       start_period: 60s
     restart: unless-stopped
- 
+
   wordpress:
     image: wordpress:6.7.2-apache
     container_name: "wordpress"
+    hostname: ${WORDPRESS_HOSTNAME}
     volumes:
       - wordpress-data:/wordpress
     environment:
@@ -48,7 +49,7 @@ services:
       - wordpress
       - proxy
     healthcheck:
-      test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/8080' || exit 1
+      test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/80' || exit 1
       interval: 10s
       timeout: 5s
       retries: 3
