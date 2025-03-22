@@ -62,8 +62,6 @@ configs:
         docker:
           endpoint: "unix:///var/run/docker.sock"
           exposedByDefault: false
-        file:
-          filename: /config.yml
       certificatesResolvers:
         cloudflare:
           acme:
@@ -75,6 +73,8 @@ configs:
               resolvers:
                 - "94.140.14.14:53"
                 - "94.140.15.15:53"
+
+
 
 networks:
   proxy:
