@@ -52,7 +52,7 @@ configs:
               entryPoint:
                 to: websecure
                 scheme: https
-          proxyProtocol:
+          forwardedHeaders:
             trustedIPs:
               - "127.0.0.1/32"
               - "192.168.24.0/24"
@@ -82,7 +82,7 @@ configs:
         websecure:
           address: ":443"
           proxyProtocol:
-            trustedIPs:
+            forwardedHeaders:
               - "127.0.0.1/32"
               - "192.168.24.0/24"
               - "173.245.48.0/20"
