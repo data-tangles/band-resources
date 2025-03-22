@@ -3,6 +3,8 @@ name: traefik
 volumes:
   traefik:
     name: traefik
+  acme:
+    name: acme
 
 services:
   traefik:
@@ -11,6 +13,7 @@ services:
     environment:
       - "CF_API_EMAIL=${CLOUDFLARE_EMAIL}"
       - "CF_DNS_API_TOKEN=${CLOUDFLARE_API_TOKEN}"
+      - "TRAEFIK_CERTIFICATESRESOLVERS_LE_ACME_STORAGE=/acme/acme.json"
     ports:  
       - "80:80"
       - "443:443"  
@@ -20,11 +23,10 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/localtime:/etc/localtime:ro"
       - "traefik:/var/log/traefik"
+      - "acme:/acme"
     configs:
       - source: traefik.yml
         target: traefik.yml
-      - source: acme.json
-        target: acme.json
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.entrypoints=http"
@@ -74,9 +76,6 @@ configs:
               resolvers:
                 - "94.140.14.14:53"
                 - "94.140.15.15:53"
-
-  acme.json:
-    content: |
 
 networks:
   proxy:
