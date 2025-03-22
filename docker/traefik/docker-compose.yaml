@@ -113,19 +113,19 @@ configs:
               - "2a06:98c0::/29"
               - "2c0f:f248::/32"
 
-        certificatesResolvers:
-          cloudflare:
-            acme:
-              email: ${CLOUDFLARE_EMAIL}
-              storage: /acme/acme.json
-              dnsChallenge:
-                provider: cloudflare
+      certificatesResolvers:
+        cloudflare:
+          acme:
+            email: ${CLOUDFLARE_EMAIL}
+            storage: /acme/acme.json
+            dnsChallenge:
+              provider: cloudflare
 
-        middlewares:
-          auth:
-            basicAuth:
-              users:
-                - admin:${DASHBOARD_CREDENTIALS}
+      middlewares:
+        auth:
+          basicAuth:
+            users:
+              - admin:${DASHBOARD_CREDENTIALS}
 
 networks:
   proxy:
