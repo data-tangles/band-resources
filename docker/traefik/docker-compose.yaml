@@ -56,10 +56,8 @@ configs:
                 scheme: https
           proxyProtocol:
             trustedIPs:
-              # Local IP
               - "127.0.0.1/32",
               - "192.168.24.0/24",
-              # Cloudflare
               - "173.245.48.0/20",
               - "103.21.244.0/22",
               - "103.22.200.0/22",
@@ -92,10 +90,8 @@ configs:
           address: ":443"
           proxyProtocol:
             trustedIPs:
-              # Local IP
               - "127.0.0.1/32",
               - "192.168.24.0/24",
-              # Cloudflare
               - "173.245.48.0/20",
               - "103.21.244.0/22",
               - "103.22.200.0/22",
