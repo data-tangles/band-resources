@@ -88,7 +88,7 @@ jobs:
           
       - name: Terraform Docs 🗒️
         if: github.event_name == 'pull_request'
-        uses: terraform-docs/gh-actions@v1.3.0
+        uses: terraform-docs/gh-actions@aeae0038ed47a547e0c0fca5c059d3335f48fb25 # v1.3.0
         id: terraform-docs
         with:
           working-dir: ${{ env.WORKING_DIRECTORY }}
