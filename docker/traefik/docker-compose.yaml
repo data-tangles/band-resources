@@ -40,11 +40,13 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.dashboard.rule=Host(`traefik.${DOMAIN_NAME}`)"
-      - "traefik.http.routers.whoami.entrypoints=websecure"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
       - "traefik.http.routers.dashboard.service=api@internal"
       - "traefik.http.routers.dashboard.middlewares=auth"
       - "traefik.http.middlewares.auth.basicauth.users=admin:${DASHBOARD_CREDENTIALS}"
-      - "traefik.http.routers.whoami.tls.certresolver=myresolver"
+      - "traefik.http.routers.traefik.tls.certresolver=myresolver"
+      - "traefik.http.routers.traefik.tls.domains[0].main=${DOMAIN_NAME}"
+      - "traefik.http.routers.traefik.tls.domains[0].sans=*.${DOMAIN_NAME}"
 
 networks:
   proxy:
