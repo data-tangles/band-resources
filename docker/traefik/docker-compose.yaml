@@ -6,7 +6,7 @@ services:
     container_name: "traefik"
     environment:
       - "CF_API_EMAIL=${CLOUDFLARE_EMAIL}"
-      - "CF_DNS_API_TOKEN=${CLOUDFLARE_EMAIL}"
+      - "CF_DNS_API_TOKEN=${CLOUDFLARE_API_TOKEN}"
     ports:  
       - "80:80"
       - "443:443"  
