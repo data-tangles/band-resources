@@ -29,7 +29,6 @@ services:
     ports:  
       - "80:80"
       - "443:443"  
-      - "8080:8080"
     networks:
       - proxy
     volumes:
@@ -39,7 +38,7 @@ services:
       - "acme:/acme"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.dashboard.rule=Host(`traefik.${DOMAIN_NAME}`)"
+      - "traefik.http.routers.dashboard.rule=Host(`traefik.${DOMAIN_NAME}`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
       - "traefik.http.routers.traefik.entrypoints=websecure"
       - "traefik.http.routers.dashboard.service=api@internal"
       - "traefik.http.routers.dashboard.middlewares=auth"
