@@ -14,7 +14,7 @@ volumes:
 
 services:
   mariadb:
-    image: mariadb:lts-noble
+    image: mariadb:lts-noble@sha256:5dfb3093333fa0ea53194ddef0a2bfa21d3b1e1353bd228b22610cd6fc0c04da
     container_name: "wp-mariadb"
     volumes:
       - mariadb-data:/var/lib/mysql
@@ -34,7 +34,7 @@ services:
     restart: unless-stopped
 
   wordpress:
-    image: wordpress:6.7.2-apache
+    image: wordpress:6.7.2-apache@sha256:8b0ffd461bfaf8e74ab98481f45d1b2596986767faf2dc65bb47c875076f8a14
     container_name: "wordpress"
     hostname: ${WORDPRESS_HOSTNAME}
     volumes:
