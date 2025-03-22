@@ -7,11 +7,14 @@ networks:
  
 volumes:
   mariadb-data:
+    name: mariadb-data
   wordpress-data:
+    name: wordpress-data
  
 services:
   mariadb:
     image: mariadb:lts-noble
+    container_name: "wp-mariadb"
     volumes:
       - mariadb-data:/var/lib/mysql
     environment:
@@ -31,6 +34,7 @@ services:
  
   wordpress:
     image: wordpress:6.7.2-apache
+    container_name: "wordpress"
     volumes:
       - wordpress-data:/wordpress
     environment:
