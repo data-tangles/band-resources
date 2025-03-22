@@ -10,6 +10,18 @@ services:
   traefik:
     image: "traefik:latest@sha256:ec1a82940b8e00eaeef33fb4113aa1d1573b2ebb6440e10c023743fe96f08475"
     container_name: "traefik"
+    command:
+      - "--accesslog.filepath=/var/log/traefik/access.log"
+      - "--log.filePath=/var/log/traefik/traefik.log"
+      - "--api=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entryPoints.web.address=:80"
+      - "--entryPoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.dnschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.dnschallenge.provider=cloudflare"
+      - "--certificatesresolvers.myresolver.acme.email=${CLOUDFLARE_EMAIL}"
+      - "--certificatesresolvers.myresolver.acme.storage=/acme/acme.json"
     environment:
       - "CF_API_EMAIL=${CLOUDFLARE_EMAIL}"
       - "CF_DNS_API_TOKEN=${CLOUDFLARE_API_TOKEN}"
@@ -24,58 +36,17 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
       - "traefik:/var/log/traefik"
       - "acme:/acme"
-    configs:
-      - source: traefik.yml
-        target: traefik.yml
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.traefik.entrypoints=http"
       - "traefik.http.routers.traefik.rule=Host(`traefik.${DOMAIN_NAME}`)"
-      - "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https"
-      - "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https"
-      - "traefik.http.routers.traefik.middlewares=traefik-https-redirect"
-      - "traefik.http.routers.traefik-secure.entrypoints=https"
-      - "traefik.http.routers.traefik-secure.rule=Host(`traefik.${DOMAIN_NAME}`)"
-      - "traefik.http.routers.traefik-secure.tls=true"
-      - "traefik.http.routers.traefik-secure.tls.certresolver=cloudflare"
-      - "traefik.http.routers.traefik-secure.tls.domains[0].sans=*.${DOMAIN_NAME}"
-      - "traefik.http.routers.traefik-secure.service=api@internal"
-      - "traefik.http.routers.mydashboard.middlewares=myauth"
-      - "traefik.http.middlewares.myauth.basicauth.users=admin:${DASHBOARD_CREDENTIALS}"
-
-configs:
-  traefik.yml:
-    content: |
-      api:
-        dashboard: true
-        debug: true
-      entryPoints:
-        http:
-          address: ":80"
-          http:
-            redirections:
-              entryPoint:
-                to: https
-                scheme: https
-        https:
-          address: ":443"
-      serversTransport:
-        insecureSkipVerify: true
-      providers:
-        docker:
-          endpoint: "unix:///var/run/docker.sock"
-          exposedByDefault: false
-      certificatesResolvers:
-        cloudflare:
-          acme:
-            email: ${CLOUDFLARE_EMAIL}
-            storage: acme.json
-            dnsChallenge:
-              provider: cloudflare
-              #disablePropagationCheck: true # uncomment this if you have issues pulling certificates through cloudflare, By setting this flag to true disables the need to wait for the propagation of the TXT record to all authoritative name servers.
-              resolvers:
-                - "94.140.14.14:53"
-                - "94.140.15.15:53"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.middlewares=auth,default-ipallowlist"
+      - "traefik.http.middlewares.default-ipallowlist.ipallowlist.sourcerange=${IP_WHITELIST}"
+      - "traefik.http.middlewares.auth.basicauth.users=admin:${DASHBOARD_CREDENTIALS}"
+      - "traefik.http.routers.traefik.tls.certresolver=myresolver"
+      - "traefik.http.routers.traefik.tls.domains[0].main=${DOMAIN_NAME}"
+      - "traefik.http.routers.traefik.tls.domains[0].sans=*.${DOMAIN_NAME}"
 
 networks:
   proxy:
