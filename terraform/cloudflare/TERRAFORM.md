@@ -24,7 +24,6 @@ No modules.
 | [cloudflare_dns_record.a_record_3](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/dns_record) | resource |
 | [cloudflare_dns_record.a_record_4](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/dns_record) | resource |
 | [cloudflare_dns_record.a_record_5](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/dns_record) | resource |
-| [cloudflare_dns_record.a_record_6](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/dns_record) | resource |
 | [cloudflare_dns_record.mx_record_1](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/dns_record) | resource |
 | [cloudflare_dns_record.mx_record_2](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/dns_record) | resource |
 | [cloudflare_dns_record.mx_record_3](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/dns_record) | resource |
@@ -46,8 +45,6 @@ No modules.
 | <a name="input_a_record_4_value"></a> [a\_record\_4\_value](#input\_a\_record\_4\_value) | Value of A record | `string` | n/a | yes |
 | <a name="input_a_record_5_name"></a> [a\_record\_5\_name](#input\_a\_record\_5\_name) | Name of A record | `string` | n/a | yes |
 | <a name="input_a_record_5_value"></a> [a\_record\_5\_value](#input\_a\_record\_5\_value) | Value of A record | `string` | n/a | yes |
-| <a name="input_a_record_6_name"></a> [a\_record\_6\_name](#input\_a\_record\_6\_name) | Name of A record | `string` | n/a | yes |
-| <a name="input_a_record_6_value"></a> [a\_record\_6\_value](#input\_a\_record\_6\_value) | Value of A record | `string` | n/a | yes |
 | <a name="input_cloudflare_api_token"></a> [cloudflare\_api\_token](#input\_cloudflare\_api\_token) | Cloudflare API Token | `string` | n/a | yes |
 | <a name="input_cloudflare_zone_id"></a> [cloudflare\_zone\_id](#input\_cloudflare\_zone\_id) | ID of Cloudflare Zone | `string` | n/a | yes |
 | <a name="input_mx_record_1_name"></a> [mx\_record\_1\_name](#input\_mx\_record\_1\_name) | Name of MX record | `string` | n/a | yes |
