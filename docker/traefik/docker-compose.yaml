@@ -37,6 +37,8 @@ services:
       - "traefik.http.routers.traefik-secure.tls.certresolver=cloudflare"
       - "traefik.http.routers.traefik-secure.tls.domains[0].sans=*.${DOMAIN_NAME}"
       - "traefik.http.routers.traefik-secure.service=api@internal"
+      - "traefik.http.routers.mydashboard.middlewares=myauth"
+      - "traefik.http.middlewares.myauth.basicauth.users=admin:${DASHBOARD_CREDENTIALS}"
 
 configs:
   traefik.yml:
