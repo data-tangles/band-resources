@@ -19,11 +19,12 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/localtime:/etc/localtime:ro"
-      - "traefik:/acme.json"
       - "traefik:/var/log/traefik"
     configs:
       - source: traefik.yml
         target: traefik.yml
+      - source: acme.json
+        target: acme.json
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.entrypoints=http"
@@ -74,7 +75,8 @@ configs:
                 - "94.140.14.14:53"
                 - "94.140.15.15:53"
 
-
+  acme.json:
+    content: |
 
 networks:
   proxy:
