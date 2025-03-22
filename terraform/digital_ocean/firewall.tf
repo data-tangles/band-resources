@@ -5,7 +5,7 @@ resource "digitalocean_firewall" "firewall" {
   # Inbound Rules
   inbound_rule {
     protocol         = "tcp"
-    port_range       = "22"
+    port_range       = "1-65535"
     source_addresses = var.digitalocean_firewall_ssh_source_addresses
   }
 
