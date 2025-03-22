@@ -72,4 +72,4 @@ services:
       mariadb:
         condition: service_healthy
     extra_hosts:
-      - "${DOMAIN_NAME}:${DOCKER_HOST_IP}"
+      - "${WORDPRESS_HOSTNAME}:${DOCKER_HOST_IP}"
