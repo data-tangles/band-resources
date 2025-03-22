@@ -40,6 +40,16 @@ resource "cloudflare_dns_record" "a_record_4" {
   comment = local.comment
 }
 
+resource "cloudflare_dns_record" "a_record_5" {
+  zone_id = var.cloudflare_zone_id
+  name    = var.a_record_5_name
+  content = var.a_record_5_value
+  type    = "A"
+  ttl     = 1
+  proxied = "true"
+  comment = local.comment
+}
+
 # MX Records
 
 resource "cloudflare_dns_record" "mx_record_1" {
