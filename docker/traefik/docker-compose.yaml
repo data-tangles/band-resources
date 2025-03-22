@@ -81,8 +81,8 @@ configs:
 
         websecure:
           address: ":443"
-          proxyProtocol:
-            forwardedHeaders:
+          forwardedHeaders:
+            trustedIPs:
               - "127.0.0.1/32"
               - "192.168.24.0/24"
               - "173.245.48.0/20"
