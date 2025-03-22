@@ -38,7 +38,7 @@ services:
     container_name: "wordpress"
     hostname: ${WORDPRESS_HOSTNAME}
     volumes:
-      - wordpress-data:/wordpress
+      - wordpress-data:/var/www/html/
     environment:
       WORDPRESS_DB_HOST: mariadb
       WORDPRESS_DATABASE_PORT_NUMBER: 3306
