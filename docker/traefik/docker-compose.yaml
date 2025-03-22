@@ -2,6 +2,7 @@ name: traefik
 
 volumes:
   traefik:
+    name: traefik
 
 services:
   traefik:
