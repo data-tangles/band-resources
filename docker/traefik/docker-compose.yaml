@@ -37,9 +37,6 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
       - "traefik:/var/log/traefik"
       - "acme:/acme"
-    configs:
-      - source: traefik.toml
-        target: traefik.toml
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.dashboard.rule=Host(`traefik.${DOMAIN_NAME}`)"
