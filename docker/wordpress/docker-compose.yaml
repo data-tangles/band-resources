@@ -2,7 +2,7 @@ name: wordpress
 
 networks:
   wordpress:
-    name: proxy
+    name: wordpress
   proxy:
     external: true
 
