@@ -34,7 +34,7 @@ services:
     restart: unless-stopped
 
   wordpress:
-    image: wordpress:6.9.0-apache@sha256:df465eeb57159be7e45b8c84459dbda72a978ee25990c96924b07afffce1ecbf
+    image: wordpress:7.1.0-apache@sha256:5a93c470ae8220fddf71f6ebe3bc94e615ddc2ae4d9810f795b830fb11c41a17
     container_name: "wordpress"
     hostname: ${WORDPRESS_HOSTNAME}
     volumes:
