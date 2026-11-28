@@ -14,7 +14,7 @@ volumes:
 
 services:
   mariadb:
-    image: mariadb:lts-noble@sha256:5dfb3093333fa0ea53194ddef0a2bfa21d3b1e1353bd228b22610cd6fc0c04da
+    image: mariadb:lts-noble@sha256:7a6c5d2070f93bb2b233ca818e46dc5ae2f25dd655f794e5216e36dba2d114a3
     container_name: "wp-mariadb"
     volumes:
       - mariadb-data:/var/lib/mysql
